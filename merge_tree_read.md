@@ -1,4 +1,4 @@
-## 一个ReadTask
+## ReadTask
 `MergeTreeReadTask`用来表示一个read任务
 
 ### estimateNumRows
@@ -12,3 +12,13 @@
   UInt64 recommended_rows = estimateNumRows();
   UInt64 rows_to_read = std::max(static_cast<UInt64>(1), std::min(block_size_params.max_block_size_rows, recommended_rows));
 ```
+
+## MergeTreeReadPool
+
+`fillPerThreadInfo`填充每一个线程的读取任务，将经过分区，minmax裁剪之后的所有part的总mark均匀的分配到每个线程。
+
+## MergeTreeInOrderSelectAlgorithm
+顺序读取mark
+
+## MergeTreeInReverseOrderSelectAlgorithm
+逆序读取mark
