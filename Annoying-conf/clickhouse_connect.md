@@ -21,6 +21,7 @@ python3.9 -m venv ~/clickhouse_env
 2.激活虚拟环境
 source ~/clickhouse_env/bin/activate
 
+pip install clickhouse-connect
 ### 示例连接代码
 这段代码目前有性能问题，应该python有个全局锁对计算密集型的线程不利。
 ```
