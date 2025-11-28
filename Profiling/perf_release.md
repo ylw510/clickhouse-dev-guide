@@ -11,4 +11,4 @@ objcopy --only-keep-debug yourBinary yourBinary.debug
 ```
 objcopy --add-gnu-debuglink=yourBinary.debug yourBinary
 ```
-经过以上操作后，使用Perf分析不带符号表的二进制程序时，就能看出热点函数名了，而不再时unknow了。
+经过以上操作后，使用Perf分析不带符号表的二进制程序时，就能看出热点函数名了，而不再是unknow了。
