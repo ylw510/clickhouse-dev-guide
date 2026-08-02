@@ -1,0 +1,33 @@
+<clickhouse>
+    <logger>
+        <level>information</level>
+        <log>/root/work/ClickHouse/tmp/cluster_2s2r/logs/keeper3.log</log>
+        <errorlog>/root/work/ClickHouse/tmp/cluster_2s2r/logs/keeper3.err.log</errorlog>
+        <console>1</console>
+    </logger>
+    <listen_host>192.168.153.128</listen_host>
+    <keeper_server>
+        <tcp_port>9283</tcp_port>
+        <server_id>3</server_id>
+        <log_storage_path>/root/work/ClickHouse/tmp/cluster_2s2r/keeper3/log</log_storage_path>
+        <snapshot_storage_path>/root/work/ClickHouse/tmp/cluster_2s2r/keeper3/snapshots</snapshot_storage_path>
+        <four_letter_word_white_list>*</four_letter_word_white_list>
+        <hostname_checks_enabled>false</hostname_checks_enabled>
+        <coordination_settings>
+            <operation_timeout_ms>10000</operation_timeout_ms>
+            <session_timeout_ms>30000</session_timeout_ms>
+            <min_session_timeout_ms>10000</min_session_timeout_ms>
+            <snapshot_distance>10000</snapshot_distance>
+            <startup_timeout>120000</startup_timeout>
+            <raft_logs_level>information</raft_logs_level>
+            <heart_beat_interval_ms>500</heart_beat_interval_ms>
+            <election_timeout_lower_bound_ms>1000</election_timeout_lower_bound_ms>
+            <election_timeout_upper_bound_ms>2000</election_timeout_upper_bound_ms>
+        </coordination_settings>
+        <raft_configuration>
+            <server><id>1</id><hostname>192.168.153.128</hostname><port>9334</port></server>
+            <server><id>2</id><hostname>192.168.153.128</hostname><port>9335</port><start_as_follower>true</start_as_follower></server>
+            <server><id>3</id><hostname>192.168.153.128</hostname><port>9336</port><start_as_follower>true</start_as_follower></server>
+        </raft_configuration>
+    </keeper_server>
+</clickhouse>
