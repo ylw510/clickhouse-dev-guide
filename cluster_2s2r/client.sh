@@ -2,9 +2,10 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CH="${CLICKHOUSE_BIN_DIR:-/root/work/ClickHouse/build_release/programs}"
-CLIENT="${CH}/clickhouse-client"
-HOST="${CH_HOST:-127.0.0.1}"
+# shellcheck source=env.sh
+source "${ROOT}/env.sh"
+CLIENT="${CLICKHOUSE_CLIENT}"
+HOST="${CH_HOST}"
 
 usage()
 {
@@ -25,8 +26,8 @@ Examples:
   $(basename "$0") node3 -q "SELECT version()"
   $(basename "$0") 4 -q "SELECT * FROM system.clusters WHERE cluster='demo_2s2r'"
 
-Environment:
-  CLICKHOUSE_BIN_DIR   path to programs dir (default: /root/ClickHouse/build_release/programs)
+Environment (see env.sh):
+  CLICKHOUSE_BIN_DIR   path to programs dir
   CH_HOST              client host (default: 127.0.0.1)
 EOF
 }

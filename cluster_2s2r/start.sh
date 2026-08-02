@@ -2,14 +2,12 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CH="${CLICKHOUSE_BIN_DIR:-/root/work/ClickHouse/build_release/programs}"
-KEEPER="${CH}/clickhouse-keeper"
-KEEPER_CLIENT="${CH}/clickhouse-keeper-client"
-SERVER="${CH}/clickhouse-server"
-
-# Keepers bind to this host/IP.
-CLUSTER_IP="${CLUSTER_IP:-192.168.153.128}"
-ZK_CHECK_HOST="${ZK_CHECK_HOST:-${CLUSTER_IP}}"
+# shellcheck source=env.sh
+source "${ROOT}/env.sh"
+CH="${CLICKHOUSE_BIN_DIR}"
+KEEPER="${CLICKHOUSE_KEEPER}"
+KEEPER_CLIENT="${CLICKHOUSE_KEEPER_CLIENT}"
+SERVER="${CLICKHOUSE_SERVER}"
 
 wait_tcp()
 {
@@ -83,7 +81,7 @@ render_shard_xml()
     <tmp_path>${ROOT}/node${node}/tmp/</tmp_path>
     <user_files_path>${ROOT}/node${node}/user_files/</user_files_path>
     <format_schema_path>${ROOT}/node${node}/format_schemas/</format_schema_path>
-    <users_config>/root/ClickHouse/build_release/programs/users.xml</users_config>
+    <users_config>${CLICKHOUSE_USERS_CONFIG}</users_config>
     <listen_host>127.0.0.1</listen_host>
     <tcp_port>${tcp_port}</tcp_port>
     <http_port>${http_port}</http_port>

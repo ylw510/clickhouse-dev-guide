@@ -2,9 +2,10 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CH="${CLICKHOUSE_BIN_DIR:-/root/work/ClickHouse/build_release/programs}"
-CLIENT="${CH}/clickhouse-keeper-client"
-HOST="${KEEPER_CLIENT_HOST:-${CLUSTER_IP:-192.168.153.128}}"
+# shellcheck source=env.sh
+source "${ROOT}/env.sh"
+CLIENT="${CLICKHOUSE_KEEPER_CLIENT}"
+HOST="${KEEPER_CLIENT_HOST}"
 
 usage()
 {
@@ -25,9 +26,9 @@ Examples:
   $(basename "$0") 1 -q "ls '/clickhouse/clusters_metadata'"
   $(basename "$0") 1 -q "get '/clickhouse/clusters_metadata'"
 
-Environment:
-  CLICKHOUSE_BIN_DIR   path to programs dir (default: /root/ClickHouse/build_release/programs)
-  CLUSTER_IP           keeper bind IP from start.sh (default: 192.168.153.128)
+Environment (see env.sh):
+  CLICKHOUSE_BIN_DIR   path to programs dir
+  CLUSTER_IP           keeper bind IP
   KEEPER_CLIENT_HOST   client host override (default: CLUSTER_IP)
 EOF
 }
